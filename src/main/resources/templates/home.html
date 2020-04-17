@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+</head>
+<body>
+<h1>Login</h1>
+<div class="container"></div>
+<a th:href="@{https://github.com/login/oauth/authorize(response_type='code',client_id=${gitHubClientId},scope='read:user',state='noState')}">GitHub Login</a><br>
+<a th:href="@{${springBootServerBaseUrl}(grant_type='authorization_code',response_type='code',client_id=${springBootClientId},state='noState')}">SpringBoot Login</a>
+</body>
+</html>

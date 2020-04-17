@@ -1,0 +1,12 @@
+spring:
+  main:
+    banner-mode: off
+
+github:
+  client-id: ${GITHUB_CLIENT_ID:cid}
+  client-secret: ${GITHUB_CLIENT_SECRET:sec}
+
+springboot:
+  client-id: ${SPRINGBOOT_CLIENT_ID:cid}
+  client-secret: ${SPRINGBOOT_CLIENT_SECRET:sec}
+  server-base-url: ${SPRINGBOOT_SERVER_BASE_URL:http://localhost:8085}
