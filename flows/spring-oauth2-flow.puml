@@ -1,0 +1,22 @@
+@startuml
+title Spring OAuth 2.0 Client <-> Server flow
+
+participant "Browser" as B
+participant "OAuth 2.0 Clients" as C
+participant "Authentication Servers" as AS
+participant "Resource Servers" as R
+
+B -> C: http://localhost:8080
+C -> B: "Webpage with Login - Link"
+B -> AS: GET http://user:123@localhost:8085/oauth/authorize\n?grant_type=authorization_code\n&response_type=code\n&client_id=cid\n&state=1234\n&redirect_uri=http://localhost:8080/oauth2/code/springboot
+AS -> B: "Any type of entering credentials e.g. login form"
+B -> AS: POST "Credentials"
+AS -> B: Redirect: http://localhost:8080/oauth2/code/springboot\n?code=xyz\nstate=1234
+B -> C: GET http://localhost:8080/oauth2/code/springboot\n?code=xyz\nstate=1234
+C -> AS: POST http://localhost:8085/oauth/token\n?grant_type=authorization_code\n&code=xyz\nHeader (Authorization: Basic Base64("clientId:clientSecret"))\nHeader (Accept: application/json)
+AS -> C: {\n  "access_token":"aa68d441-d954-47f9-9bd7-155ffd728269",\n  "token_type":"bearer",\n  "expires_in":43129,\n  "scope":"resource:read"\n}
+C -> B: OK (or what ever)
+== Authentication complete ==
+C -> R: GET http://localhost:8082/data\nHeader (Authorization: Bearer aa68d441-d954-47f9-9bd7-155ffd728269)
+R -> C: "Requested data"
+@enduml

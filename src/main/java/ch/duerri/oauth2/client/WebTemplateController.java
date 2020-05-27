@@ -21,7 +21,7 @@ public class WebTemplateController {
     public String getHomePage(Model model) {
         model.addAttribute("gitHubClientId", gitHubClientId);
         model.addAttribute("springBootClientId", springBootClientId);
-        model.addAttribute("springBootServerBaseUrl", springBootServerBaseUrl + "/oauth/authorize");
+        model.addAttribute("springBootServerAuthorizeUrl", springBootServerBaseUrl + "/oauth/authorize");
         return "home";
     }
 }
